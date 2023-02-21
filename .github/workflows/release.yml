@@ -1,0 +1,37 @@
+name: Create Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to set, e.g. 1.2.3'
+        required: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - run: |
+          M="${L}a"
+          mvn --batch-mode compile exec:java -Dexec.mainClass=org.example.SetVersion -Dexec.args="$L"
+          git add .
+          git commit -a -m "released $L"
+          git push
+          git tag v$L
+          git push --tags
+          
+          #mvn --batch-mode deploy
+          
+          mvn --batch-mode compile exec:java -Dexec.mainClass=org.example.SetVersion -Dexec.args="$M"
+          git commit -a -m "changed to $M"
+          git push
+        env:
+          L: ${{ inputs.version }}
+
