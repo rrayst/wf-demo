@@ -8,7 +8,7 @@ on:
         required: true
 
 jobs:
-  test:
+  release:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,6 +21,8 @@ jobs:
       - run: |
           M="${L}a"
           mvn --batch-mode compile exec:java -Dexec.mainClass=org.example.SetVersion -Dexec.args="$L"
+          git config user.name github-actions
+          git config user.email github-actions@github.com
           git add .
           git commit -a -m "released $L"
           git push
@@ -29,7 +31,7 @@ jobs:
           
           #mvn --batch-mode deploy
           
-          mvn --batch-mode compile exec:java -Dexec.mainClass=org.example.SetVersion -Dexec.args="$M"
+          mvn --batch-mode exec:java -Dexec.mainClass=org.example.SetVersion -Dexec.args="$M"
           git commit -a -m "changed to $M"
           git push
         env:
