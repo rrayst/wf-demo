@@ -11,4 +11,16 @@ public class DemoTest {
         assertEquals(5, dc.add(2, 3));
     }
 
+    @Test
+    public void run2() {
+        DemoComponent dc = new DemoComponent();
+        assertEquals(6, dc.add(3, 3));
+    }
+
+    @Test
+    public void run3() {
+        DemoComponent dc = new DemoComponent();
+        assertEquals(7, dc.add(3, 4));
+    }
+
 }
