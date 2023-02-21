@@ -18,9 +18,9 @@ public class DemoTest {
     }
 
     @Test
-    public void failing() {
+    public void run3() {
         DemoComponent dc = new DemoComponent();
-        assertEquals(6, dc.add(3, 4));
+        assertEquals(7, dc.add(3, 4));
     }
 
 }
