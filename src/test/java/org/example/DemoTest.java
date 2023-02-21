@@ -17,4 +17,10 @@ public class DemoTest {
         assertEquals(6, dc.add(3, 3));
     }
 
+    @Test
+    public void failing() {
+        DemoComponent dc = new DemoComponent();
+        assertEquals(6, dc.add(3, 4));
+    }
+
 }
